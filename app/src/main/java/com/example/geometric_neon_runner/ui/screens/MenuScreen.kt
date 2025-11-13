@@ -2,6 +2,8 @@ package com.example.geometric_neon_runner.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Person
@@ -33,16 +35,18 @@ fun MenuScreen(
     val isLoading by viewModel.isLoading.collectAsState()
 
     val bestScore = bestScores.values.maxOrNull() ?: 0
+    val scrollState = rememberScrollState()
 
     NeonTunnelTheme {
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .background(DarkBackground)
-                .padding(32.dp),
+                .verticalScroll(scrollState)
+                .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(modifier = Modifier.height(64.dp))
+            Spacer(modifier = Modifier.height(32.dp))
 
             Text(
                 text = "NEON RUNNER",
@@ -52,12 +56,12 @@ fun MenuScreen(
             Text(
                 text = "MAIN MENU",
                 style = MaterialTheme.typography.headlineLarge.copy(color = MaterialTheme.colorScheme.secondary),
-                modifier = Modifier.padding(bottom = 48.dp)
+                modifier = Modifier.padding(bottom = 24.dp)
             )
 
             PlayerStatus(username = username, bestScore = bestScore)
 
-            Spacer(modifier = Modifier.height(48.dp))
+            Spacer(modifier = Modifier.height(32.dp))
 
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -101,6 +105,8 @@ fun MenuScreen(
                     neonColor = Color.Gray.copy(alpha = 0.8f)
                 )
             }
+
+            Spacer(modifier = Modifier.height(32.dp))
         }
     }
 }
